@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <head>
+        <script type="text/javascript">
+            var validated = false;
+            function validation(event){
+                let keycode = event.keyCode || event.which;
+                let emailValue = document.getElementById("email");
+                let inputValue = emailValue.value;
+                if(!isNaN(inputValue[0])){
+                    let phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
+                    if(inputValue.match(phoneno)){
+                        validated = true;
+                        document.getElementById('errors').innerHTML="";
+                    } else {
+                        validated = false;
+                        document.getElementById('errors').innerHTML="*Please enter correct Phone Number*";
+                    }     
+                } else {
+                    let validRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                    if (inputValue.match(validRegex)) {
+                            validated = true;
+                            document.getElementById('errors').innerHTML="";
+                    } else {
+                            validated = false;
+                            document.getElementById('errors').innerHTML="*Please enter correct Email Address*";
+                    }
+                }
+            }
+
+            function submitForm() {
+                if(validated != false){
+                    let form = document.getElementById("form");
+                    form.submit();
+                    alert('All Good!!!');
+                    document.getElementById('email').value = "";
+                }
+            }
+
+        </script>
+  </head>
+  <body>
+    <div class="container">
+        <div class="whiteContainer">
+            <div class="leftwrapper">
+                <div class="blackbox"></div>
+                <div class="need">Need help? <a href="#">Contact Us</a></div>
+            </div>
+            <div class="wrapper">
+                <div class="loginWrapper">
+                    <div class="title"><span>Login to Dashboard</span></div>
+                    <form id="form" action="javascript:void(0);"  method="post" class="form">
+                        <div class="row">
+                            <label class="label">Email or Mobile Number</label>
+                            <input type="text" name="email" id="email" onkeypress="validation(event)" onkeyup="validation(event)" />
+                            <div id="errors" class="error error-txt"></div>
+                        </div>
+                        <div class="row button">
+                            <input type="submit" class="button" value="Next" onclick="submitForm()">
+                        </div>
+                        </form>
+                    <div class="strike">
+                        <span>Or</span>
+                    </div>
+                    <div class="row m-24">
+                        <div class="google-btn">
+                            <div class="google-icon-wrapper">
+                              <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+                            </div>
+                            <p class="btn-text"><b>Sign in with google</b></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottomLine">
+                    Protected by reCAPTCHA Google <br/><a href="#">Privacy Policy</a> & <a href="#">Terms of Service</a> Apply
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </body>
+</html>
